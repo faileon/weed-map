@@ -6,14 +6,10 @@ export default component$(() => {
     <>
       <main>
         <Header />
-        <section>
+          <h1>Map</h1>
           <Slot />
-        </section>
       </main>
       <footer>
-        <a href="https://www.builder.io/" target="_blank">
-          Made with ♡ by Builder.io
-        </a>
       </footer>
     </>
   );

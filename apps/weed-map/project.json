@@ -12,7 +12,8 @@
       },
       "configurations": {
         "preview": {}
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "build.client": {
       "executor": "@nx/vite:build",
@@ -31,7 +32,16 @@
         "preview": {
           "ssr": "src/entry.preview.tsx",
           "mode": "production"
+        },
+        "production": {
+          "configFile": "apps/weed-map/adapters/deno/vite.deno.config.ts"
         }
+      }
+    },
+    "build.deno": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx nx run deno-demo:build:production"
       }
     },
     "preview": {
