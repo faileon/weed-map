@@ -15,6 +15,7 @@
   "devDependencies": {
     "@builder.io/qwik": "~1.1.1",
     "@builder.io/qwik-city": "~1.1.1",
+    "@nx/cypress": "16.3.2",
     "@nx/eslint-plugin": "16.3.2",
     "@nx/js": "16.3.2",
     "@nx/linter": "16.3.2",
@@ -26,8 +27,10 @@
     "@typescript-eslint/parser": "^5.58.0",
     "@vitest/ui": "^0.31.0",
     "autoprefixer": "~10.4.11",
+    "cypress": "^12.11.0",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-qwik": "~1.1.1",
     "jsdom": "~20.0.3",
     "node-fetch": "~3.3.0",
