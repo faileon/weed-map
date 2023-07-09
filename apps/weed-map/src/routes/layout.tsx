@@ -1,16 +1,14 @@
-import { component$, Slot } from '@builder.io/qwik';
+import {component$, Slot} from '@builder.io/qwik';
 import Header from '../components/header/header';
 
 export default component$(() => {
   return (
     <>
-      <main>
-        <Header />
-          <h1>Map</h1>
-          <Slot />
+      <Header/>
+      <main class="container mx-auto">
+        <Slot/>
       </main>
-      <footer>
-      </footer>
+      <footer/>
     </>
   );
 });

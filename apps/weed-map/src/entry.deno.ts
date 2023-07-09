@@ -31,7 +31,6 @@ console.log(`Server started: http://localhost:${port}/`);
 
 // https://deno.com/manual/examples/http_server
 // Connections to the server will be yielded up as an async iterable.
-// @ts-ignore
 for await (const conn of server) {
   serveHttp(conn);
 }
