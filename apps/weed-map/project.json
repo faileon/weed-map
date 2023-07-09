@@ -41,7 +41,7 @@
     "build.deno": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx nx run deno-demo:build:production"
+        "command": "npx nx run weed-map:build:production"
       }
     },
     "preview": {
@@ -50,6 +50,13 @@
         "buildTarget": "weed-map:build",
         "port": 4300
       }
+    },
+    "preview-deno": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "deno run --allow-net --allow-read --allow-env dist/apps/weed-map/server/entry.deno.js"
+      },
+      "dependsOn": ["build.deno"]
     },
     "test": {
       "executor": "@nx/vite:test",
