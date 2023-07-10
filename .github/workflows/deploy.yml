@@ -23,6 +23,9 @@ jobs:
           node-version: lts/*
 
       - name: Build step
+        env:
+          PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+          PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
         run: npm install && npm run build # 📝 Update the build command(s)
 
       - name: Upload to Deno Deploy
