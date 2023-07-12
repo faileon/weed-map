@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import {routeLoader$} from "@builder.io/qwik-city";
+import {Link, routeLoader$} from "@builder.io/qwik-city";
 import {getSupabaseClient} from "@api/client";
 
 export const head: DocumentHead = {
@@ -29,10 +29,12 @@ export default component$(() => {
       <div>Stores</div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {stores.value?.map(store => {
-          return <div key={`${store.name.toLowerCase().split(' ').join('-')}-${store.id}`} class="flex flex-col gap-2 bg-elevated rounded-md p-4 drop-shadow ">
-            <span>{store.name}</span>
-            <span>{new Date(store.created_at).toDateString()}</span>
-          </div>
+          return <Link href={`/stores/${store.slug}`} key={`${store.name.toLowerCase().split(' ').join('-')}-${store.id}`}>
+            <div  class="flex flex-col gap-2 bg-elevated rounded-md p-4 drop-shadow ">
+              <span>{store.name}</span>
+              <span>{new Date(store.created_at).toDateString()}</span>
+            </div>
+          </Link>
         })}
       </div>
     </>
