@@ -19,7 +19,7 @@ const { router, notFound, staticFile } = createQwikCity({
   qwikCityPlan,
   manifest,
   static: {
-    root: 'client'
+    root: 'dist/apps/weed-map/client'
   }
 });
 
