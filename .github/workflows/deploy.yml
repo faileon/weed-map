@@ -33,5 +33,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "cute-frog-23"
-          entrypoint: "https://deno.land/std/http/file_server.ts" # 📝 Update the entrypoint
+          entrypoint: "dist/apps/weed-map/server/entry.deno.js" # 📝 Update the entrypoint
           root: "dist/apps/weed-map/client"
