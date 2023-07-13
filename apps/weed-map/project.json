@@ -54,7 +54,8 @@
     "preview-deno": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "deno run --allow-net --allow-read --allow-env dist/apps/weed-map/server/entry.deno.js"
+        "cwd": "dist/apps/weed-map",
+        "command": "deno run --allow-net --allow-read --allow-env server/entry.deno.js"
       },
       "dependsOn": ["build.deno"]
     },
