@@ -24,7 +24,8 @@ export default component$(() => {
   return (
     <>
       <div id="map" class="h-[750px]" />
-      <Link href="/stores">Zobrazit seznam</Link>
+      <Link href="/stores">Stores</Link>
+      <Link href="/strains">Strains</Link>
     </>
   );
 });
