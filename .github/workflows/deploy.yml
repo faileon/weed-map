@@ -24,7 +24,7 @@ jobs:
           node-version: lts/*
 
       - name: Build step
-      - uses: pnpm/action-setup@v2.2.4
+        uses: pnpm/action-setup@v2.2.4
         with:
             version: 8.6.2
         env:
