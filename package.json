@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "preinstall": "npx only-allow pnpm", 
+    "preinstall": "npx only-allow pnpm",
     "start": "nx serve weed-map",
-    "build": "nx build weed-map"
+    "build": "nx build weed-map",
+    "test": "nx e2e weed-map-e2e --watch"
   },
   "private": true,
   "dependencies": {

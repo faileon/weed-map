@@ -24,14 +24,17 @@ jobs:
           node-version: lts/*
 
       - name: Build step
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+            version: 8.6.2
         env:
           PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
           PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
-        run: npm install && npm run build # 📝 Update the build command(s)
+        run: pnpm install && pnpm build
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "cute-frog-23"
-          entrypoint: "server/entry.deno.js" # 📝 Update the entrypoint
+          entrypoint: "server/entry.deno.js"
           root: "dist/apps/weed-map"
