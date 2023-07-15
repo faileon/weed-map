@@ -6,13 +6,15 @@
     "preinstall": "npx only-allow pnpm",
     "start": "nx serve weed-map",
     "build": "nx build weed-map",
-    "test": "nx e2e weed-map-e2e --watch"
+    "test": "nx e2e weed-map-e2e --watch",
+    "ct": "nx ct weed-map --watch"
   },
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.26.0",
     "leaflet": "^1.9.4",
-    "supabase-auth-helpers-qwik": "^0.0.3"
+    "supabase-auth-helpers-qwik": "^0.0.3",
+    "tslib": "^2.6.0"
   },
   "devDependencies": {
     "@builder.io/qwik": "~1.2.6",
@@ -30,6 +32,7 @@
     "@vitest/ui": "^0.31.0",
     "autoprefixer": "~10.4.11",
     "cypress": "^12.11.0",
+    "cypress-ct-qwik": "^0.3.0",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",

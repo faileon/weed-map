@@ -2,7 +2,7 @@ import { component$, useVisibleTask$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import leaflet from 'leaflet';
 import { Link, useNavigate } from '@builder.io/qwik-city';
-
+import { Button } from '@ui/button';
 
 export default component$(() => {
   // leaflet.map('map').setView([51.505, -0.09], 13)

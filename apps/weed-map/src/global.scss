@@ -1,7 +1,7 @@
 @tailwind components;
 @tailwind base;
 @tailwind utilities;
-// todo consider loading it inside the component and not here...
+// TODO consider loading it inside the component and not here...
 @import 'leaflet/dist/leaflet.css';
 /**
  * WHAT IS THIS FILE?
@@ -12,18 +12,14 @@
  */
 
 body {
-  @apply bg-surface;
+  @apply bg-surface font-sans;
 }
-
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 800,
-  'GRAD' 0,
-  'opsz' 48
+  font-variation-settings: 'FILL' 0, 'wght' 800, 'GRAD' 0, 'opsz' 48;
 }
 
-textarea,input {
+textarea,
+input {
   @apply font-mono;
 }
