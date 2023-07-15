@@ -25,6 +25,7 @@ const mockStrain =  {
   purity: { min: 90, max: 100 },
   thc: {min: 20, max: 20 },
   cbd: {min: 0, max: 0 },
+  price: { min: 10, max: 15, currency: 'USD' },
   parents: ['strain2'],
   aliases: ['Gorilla Glue', 'Sticky Glue'],
   description: "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
@@ -96,6 +97,9 @@ export default component$(() => {
                     CBD {strain.cbd.min}-{strain.cbd.max}%
                   </li>
                 </ul>
+                <div class="flex flex-row items-baseline">
+                  <span>Price: {strain.price.min}-{strain.price.max} {strain.price.currency}</span> 
+                </div>
               </div>
             </div>
             
