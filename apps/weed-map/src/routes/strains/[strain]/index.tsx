@@ -19,6 +19,11 @@ const mockStrain =  {
   slug: 'strain1',
   name: 'Strain name 2',
   img_url: 'https://images.leafly.com/flower-images/gg-4.jpg',
+  rating: {
+    value: 4.6,
+    count: 5142,
+    likes: 82265
+  },
   created_at: '2023-07-09T12:54:01.829421+00:00',
   updated_at: '2023-07-09T12:54:01.829421+00:00',
   genetic: 'Sativa',
@@ -100,6 +105,12 @@ export default component$(() => {
                 <div class="flex flex-row items-baseline">
                   <span>Price: {strain.price.min}-{strain.price.max} {strain.price.currency}</span> 
                 </div>
+              </div>
+              <div class="flex flex-col items-baseline">
+                <span class="text-4xl">{strain.rating.value}</span>
+                <span>****</span>
+                <span>{strain.rating.count} ratings</span>
+                <span>{strain.rating.likes} likes</span>
               </div>
             </div>
             
