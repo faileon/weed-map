@@ -1,6 +1,11 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { Link, routeLoader$, useNavigate } from '@builder.io/qwik-city';
+import {
+  Link,
+  routeLoader$,
+  useLocation,
+  useNavigate,
+} from '@builder.io/qwik-city';
 import { getSupabaseClient } from '@api/client';
 import { Button } from '@ui/button';
 import { Icon } from '@ui/icon';
@@ -15,6 +20,7 @@ export const head: DocumentHead = {
   ],
 };
 
+// todo move to utils
 const mergeSearchQuery = (
   params: URLSearchParams,
   name: string,
@@ -30,7 +36,11 @@ const mergeSearchQuery = (
     } else {
       newValue = `${oldParams},${value}`;
     }
-    newParams.set(name, newValue);
+    if (newValue) {
+      newParams.set(name, newValue);
+    } else {
+      newParams.delete(name);
+    }
   } else {
     newParams.append(name, value);
   }
@@ -39,13 +49,13 @@ const mergeSearchQuery = (
 
 export const useStores = routeLoader$(async (req) => {
   const { query } = req;
+  console.log('hit the server with', query);
   const client = getSupabaseClient(req);
   const { data, count } = await client.from('stores').select('*');
 
   return {
     data,
     count,
-    query,
   };
 });
 
@@ -70,6 +80,9 @@ export default component$(() => {
       icon,
     }));
 
+  const query = useLocation();
+  const { searchParams } = query.url;
+
   return (
     <main class="container mx-auto flex flex-col gap-4 mt-4">
       {/* ROW WITH FILTERS */}
@@ -79,7 +92,7 @@ export default component$(() => {
             <Link
               key={value}
               href={`/stores?${mergeSearchQuery(
-                stores.value.query,
+                searchParams,
                 'filters',
                 value
               )}`}
@@ -87,13 +100,13 @@ export default component$(() => {
               <div
                 class={[
                   `flex flex-col gap-1 items-center  hover:text-primary-600 text-center px-4`,
-                  stores.value.query?.get('filters')?.split(',').includes(value)
+                  searchParams.get('filters')?.split(',')?.includes(value)
                     ? `text-primary-600 border-b-2 border-primary-600 font-bold`
                     : `text-primary-400`,
                 ]}
               >
                 <Icon icon={icon}></Icon>
-                <span class="font-mono text-sm">{label}</span>
+                <span class="font-mono text-sm whitespace-nowrap">{label}</span>
               </div>
             </Link>
           ))}

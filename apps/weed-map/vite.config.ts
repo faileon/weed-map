@@ -8,7 +8,9 @@ export default defineConfig({
   cacheDir: '../../node_modules/.vite/apps/weed-map',
   plugins: [
     qwikNxVite(),
-    qwikCity(),
+    qwikCity({
+      trailingSlash: false,
+    }),
     qwikVite({
       client: {
         outDir: '../../dist/apps/weed-map/client',
