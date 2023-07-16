@@ -3,6 +3,7 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 import leaflet from 'leaflet';
 import { Link, useNavigate } from '@builder.io/qwik-city';
 import { Button } from '@ui/button';
+import { Icon } from '@ui/icon';
 
 export default component$(() => {
   // leaflet.map('map').setView([51.505, -0.09], 13)
@@ -23,8 +24,28 @@ export default component$(() => {
 
   return (
     <>
-      <div id="map" class="h-[750px]" />
-      <Link href="/stores">Zobrazit seznam</Link>
+      <div class="absolute inset-0 flex">
+        <div class="relative flex-1 h-full">
+          <div class="absolute bottom-2 w-full flex justify-center">
+            <Link href="/stores" style="z-index: 500">
+              <Button
+                label="Zobrazit seznam"
+                icon="list"
+                variant="filled"
+              ></Button>
+            </Link>
+          </div>
+
+          <div id="map" class="w-full h-full" />
+        </div>
+
+        <div class="h-full w-[500px] hidden lg:flex p-4 flex items-center justify-center">
+          <div class="flex flex-col gap-2 items-center">
+            <Icon icon="storefront" class="text-primary-600 text-5xl"></Icon>
+            <span class="font-mono">List of stores...</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 });

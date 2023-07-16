@@ -13,6 +13,7 @@ interface ButtonProps extends HTMLButtonProps {
   onClick$?: PropFunction<() => void>;
   variant?: 'bordered' | 'filled' | 'ghost';
   color?: 'primary' | 'secondary' | 'error';
+  class?: string;
 }
 
 export const Button = component$(
@@ -21,6 +22,7 @@ export const Button = component$(
     iconPosition = 'start',
     label,
     variant = 'bordered',
+    class: _class,
     ...rest
   }: ButtonProps) => {
     const iconCmp = icon && <Icon icon={icon} />;
@@ -37,6 +39,7 @@ export const Button = component$(
             ? `bg-primary-700 text-primary-50 border-2 border-primary-800 hover:bg-primary-600`
             : `text-primary-600 hover:bg-primary-50`,
           isIconOnly && `rounded-full`,
+          _class,
         ]}
       >
         {icon && iconPosition === 'start' && iconCmp}

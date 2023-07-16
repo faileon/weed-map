@@ -40,6 +40,15 @@ module.exports = {
         sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
         mono: ['Lekton', ...defaultTheme.fontFamily.sans],
       },
+      container: {
+        screens: {
+          sm: '796px',
+          md: '932px',
+          lg: '1224px',
+          xl: '1480px',
+          '2xl': '1736px',
+        },
+      },
     },
   },
   plugins: [],
