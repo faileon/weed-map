@@ -1,7 +1,12 @@
-import { PropFunction, component$ } from '@builder.io/qwik';
+import {
+  PropFunction,
+  QwikIntrinsicElements,
+  component$,
+} from '@builder.io/qwik';
 import { Icon } from '@ui/icon';
+export type HTMLButtonProps = QwikIntrinsicElements['button'];
 
-interface ButtonProps {
+interface ButtonProps extends HTMLButtonProps {
   iconPosition?: 'start' | 'end';
   label?: string;
   icon?: string;
@@ -19,15 +24,19 @@ export const Button = component$(
     ...rest
   }: ButtonProps) => {
     const iconCmp = icon && <Icon icon={icon} />;
+    const isIconOnly = !label && !!icon;
 
     return (
       <button
         {...rest}
         class={[
-          `rounded-md  flex items-center text-primary-800`,
+          `rounded-md  flex items-center `,
           label ? 'px-4 py-2' : 'p-2',
-          variant === 'bordered' && `border-2 border-primary-800`,
-          variant === 'filled' && `bg-primary-100`,
+          variant === 'bordered' && `border-2 border-primary-600`,
+          variant === 'filled'
+            ? `bg-primary-700 text-primary-50 border-2 border-primary-800 hover:bg-primary-600`
+            : `text-primary-600 hover:bg-primary-50`,
+          isIconOnly && `rounded-full`,
         ]}
       >
         {icon && iconPosition === 'start' && iconCmp}

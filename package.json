@@ -13,8 +13,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.26.0",
     "leaflet": "^1.9.4",
-    "supabase-auth-helpers-qwik": "^0.0.3",
-    "tslib": "^2.6.0"
+    "supabase-auth-helpers-qwik": "^0.0.3"
   },
   "devDependencies": {
     "@builder.io/qwik": "~1.2.6",
