@@ -15,11 +15,9 @@ export default component$(() => {
     // todo consider getting hold of the element like so:
     // https://qwik.builder.io/docs/components/overview/#getting-hold-of-dom-element
     console.log('Ran on the CLIENT');
-    const map = leaflet.map('map').setView([51.505, -0.09], 13);
+    const map = leaflet.map('map').setView([50.099, 14.42], 13);
 
-    leaflet
-      .tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png')
-      .addTo(map);
+    leaflet.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}').addTo(map);
   });
 
   return (
@@ -28,11 +26,7 @@ export default component$(() => {
         <div class="relative flex-1 h-full">
           <div class="absolute bottom-2 w-full flex justify-center">
             <Link href="/stores" style="z-index: 500">
-              <Button
-                label="Zobrazit seznam"
-                icon="list"
-                variant="filled"
-              ></Button>
+              <Button label="Zobrazit seznam" icon="list" variant="filled"></Button>
             </Link>
           </div>
 
