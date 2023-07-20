@@ -177,7 +177,7 @@ export default component$(() => {
 
                   {/* tags */}
                   <div class="flex flex-wrap gap-2 text-sm text-primary-600">
-                    {store.tags.map(({ label, value, icon }) => (
+                    {store.tags.map(({ label, value, icon }: any) => (
                       <div key="value" class="flex gap-2 px-2 py-0.5 rounded bg-elevated items-center">
                         <Icon icon={icon} class="text-xs"></Icon>
                         <div>{label}</div>
