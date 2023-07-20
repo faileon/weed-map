@@ -88,6 +88,14 @@
       "options": {
         "lintFilePatterns": ["apps/weed-map/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "ct": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/weed-map/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true
+      }
     }
   },
   "tags": []

@@ -1,6 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
-import { Logo } from '../icons/logo';
+import { Logo } from '../logo/logo';
 import styles from './header.scss?inline';
+import { Button } from '@ui/button';
 
 export default component$(() => {
   useStylesScoped$(styles);
@@ -27,8 +28,8 @@ export default component$(() => {
         </div>
 
         <div class="flex gap-2 items-center ml-auto">
-          <i class="material-symbols-outlined">favorite</i>
-          <i class="material-symbols-outlined">account_circle</i>
+          <Button icon="favorite" variant="ghost"></Button>
+          <Button icon="account_circle" variant="ghost"></Button>
         </div>
       </div>
     </header>
