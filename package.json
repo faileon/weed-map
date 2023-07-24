@@ -6,6 +6,7 @@
     "preinstall": "npx only-allow pnpm",
     "start": "nx serve weed-map",
     "build": "nx build weed-map",
+    "preview": "nx preview-deno weed-map",
     "test": "nx e2e weed-map-e2e --watch",
     "ct": "nx ct weed-map --watch"
   },

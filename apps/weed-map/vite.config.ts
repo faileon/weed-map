@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     qwikNxVite(),
     qwikCity({
-      trailingSlash: false,
+      // trailingSlash: false,
     }),
     qwikVite({
       client: {

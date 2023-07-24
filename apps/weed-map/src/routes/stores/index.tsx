@@ -42,6 +42,9 @@ const mergeSearchQuery = (params: URLSearchParams, name: string, value: string) 
 };
 
 export const useStores = routeLoader$(async (req) => {
+  const { query } = req;
+  const queryFilters = query.get('filters');
+  console.log('FILTERS', queryFilters);
   const filters = [
     ['Open now', 'door_open'],
     ['Online order', 'shopping_cart'],
@@ -63,6 +66,7 @@ export const useStores = routeLoader$(async (req) => {
     data: Array(40)
       .fill(0)
       .map((_, idx) => ({
+        id: `store-${idx}`,
         name: faker.animal.bird(),
         description: faker.lorem.sentences(5),
         slug: 'high-society',
@@ -83,14 +87,14 @@ export const useStores = routeLoader$(async (req) => {
     count: 0,
   };
 
-  const { query } = req;
+  /* const { query } = req;
   console.log('hit the server with', query);
   const client = getSupabaseClient(req);
   const { data, count } = await client.from('stores').select('*');
   return {
     data,
     count,
-  };
+  }; */
 });
 
 export default component$(() => {
@@ -122,7 +126,7 @@ export default component$(() => {
       <div class="flex gap-8 w-full justify-center">
         <div class="flex flex-1 gap-4 flex-row-reverse items-center overflow-hidden">
           {filters.map(({ value, label, icon }) => (
-            <Link key={value} href={`/stores?${mergeSearchQuery(url.searchParams, 'filters', value)}`}>
+            <Link key={value} href={`/stores/?${mergeSearchQuery(url.searchParams, 'filters', value)}`}>
               <div
                 class={[
                   `flex flex-col gap-1 items-center  hover:text-primary-600 text-center px-4`,
