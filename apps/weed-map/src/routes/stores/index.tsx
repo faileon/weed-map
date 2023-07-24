@@ -151,53 +151,54 @@ export default component$(() => {
       <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {stores.value?.data?.map((store) => {
           return (
-            <Link href={`/stores/${store.slug}`} key={`${store.name.toLowerCase().split(' ').join('-')}-${store.id}`}>
-              {/* STORE CARD (TODO: COMPONeNt) */}
-              <div class="flex flex-col gap-2">
-                {/* featured images: TODO: carousel component */}
-                <div class="rounded-lg overflow-hidden relative">
-                  <img src={store.images[0]} alt="" width={400} height={400} />
-
-                  <Icon icon="favorite" class="absolute top-5 right-5 text-primary-700"></Icon>
-
-                  {/* CAROUSEL DOTS */}
-                  <div class="absolute bottom-5 w-full flex justify-center gap-1.5">
-                    {store.images.map((url: string) => (
-                      <div key={url} class="h-1.5 w-1.5 rounded-full bg-slate-100"></div>
-                    ))}
-                  </div>
-                </div>
-                {/* metadata */}
+            <div class="relative flex rounded-lg overflow-hidden" key={`${store.name.toLowerCase().split(' ').join('-')}-${store.id}`}>
+              <Link href={`/stores/${store.slug}`} class="h-full p-2 hover:bg-primary-50">
+                {/* STORE CARD (TODO: COMPONeNt) */}
                 <div class="flex flex-col gap-2">
-                  {/* name, rating */}
-                  <div class="flex justify-between items-center">
-                    <div class="font-bold font-mono text-lg">{store.name}</div>
-                    <div class="flex gap-1 text-base items-center">
-                      <Icon icon="star" class="text-base" filled></Icon>
-                      <span>{store.rating.value.toLocaleString()}</span>
-                      <span class="text-xs">({store.rating.count})</span>
+                  {/* featured images: TODO: carousel component */}
+                  <div class="rounded-lg overflow-hidden relative">
+                    <img src={store.images[0]} alt="" width={400} height={400} />
+
+                    {/* CAROUSEL DOTS */}
+                    <div class="absolute bottom-5 w-full flex justify-center gap-1.5">
+                      {store.images.map((url: string) => (
+                        <div key={url} class="h-1.5 w-1.5 rounded-full bg-slate-100"></div>
+                      ))}
                     </div>
                   </div>
-
-                  {/* tags */}
-                  <div class="flex flex-wrap gap-2 text-sm text-primary-600">
-                    {store.tags.map(({ label, value, icon }: any) => (
-                      <div key="value" class="flex gap-2 px-2 py-0.5 rounded bg-elevated items-center">
-                        <Icon icon={icon} class="text-xs"></Icon>
-                        <div>{label}</div>
+                  {/* metadata */}
+                  <div class="flex flex-col gap-2">
+                    {/* name, rating */}
+                    <div class="flex justify-between items-center font-mono">
+                      <div class="font-bold text-lg ">{store.name}</div>
+                      <div class="flex gap-1 text-base items-center text-secondary-500">
+                        <Icon icon="star" class="text-base text-secondary-500" filled></Icon>
+                        <span class="font-medium">{store.rating.value.toLocaleString()}</span>
+                        <span class="text-xs">({store.rating.count})</span>
                       </div>
-                    ))}
-                  </div>
-
-                  {store.isOpen && (
-                    <div class="flex gap-2 items-center">
-                      <Icon icon="circle" filled class="text-xs text-emerald-600"></Icon>
-                      <strong>Open now</strong>
                     </div>
-                  )}
+
+                    {/* tags */}
+                    <div class="flex flex-wrap gap-2 text-sm text-primary-600">
+                      {store.tags.map(({ label, value, icon }: any) => (
+                        <div key="value" class="flex gap-2 px-2 py-0.5 rounded bg-elevated items-center">
+                          <Icon icon={icon} class="text-xs"></Icon>
+                          <div>{label}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {store.isOpen && (
+                      <div class="flex gap-2 items-center">
+                        <Icon icon="circle" filled class="text-xs text-emerald-600"></Icon>
+                        <strong>Open now</strong>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+              <Button icon="favorite" class="absolute top-5 right-5 text-primary-700" variant="ghost"></Button>
+            </div>
           );
         })}
       </div>
