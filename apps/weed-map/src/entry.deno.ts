@@ -8,12 +8,12 @@
  * - https://deno.com/manual/examples/http_server
  *
  */
-import { createQwikCity } from "@builder.io/qwik-city/middleware/deno";
-import qwikCityPlan from "@qwik-city-plan";
-import { manifest } from "@qwik-client-manifest";
-import render from "./entry.ssr";
+import { createQwikCity } from '@builder.io/qwik-city/middleware/deno';
+import qwikCityPlan from '@qwik-city-plan';
+import { manifest } from '@qwik-client-manifest';
+import render from './entry.ssr';
 // @ts-ignore
-import { serve } from "https://deno.land/std@0.194.0/http/server.ts";
+import { serve } from 'https://deno.land/std@0.194.0/http/server.ts';
 
 // Create the Qwik City Deno middleware
 const { router, notFound, staticFile } = createQwikCity({
@@ -21,15 +21,12 @@ const { router, notFound, staticFile } = createQwikCity({
   qwikCityPlan,
   manifest,
   static: {
-    root: 'client'
-  }
+    root: 'client',
+  },
 });
 
 // Allow for dynamic port
-const port = Number(Deno.env.get("PORT") ?? 8080);
-
-/* eslint-disable */
-console.log(`Server starter: http://localhost:${port}/app/`);
+const port = Number(Deno.env.get('PORT') ?? 8080);
 
 serve(
   async (request: Request, conn: any) => {

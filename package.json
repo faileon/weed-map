@@ -6,11 +6,13 @@
     "preinstall": "npx only-allow pnpm",
     "start": "nx serve weed-map",
     "build": "nx build weed-map",
+    "preview": "nx preview-deno weed-map",
     "test": "nx e2e weed-map-e2e --watch",
     "ct": "nx ct weed-map --watch"
   },
   "private": true,
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@supabase/supabase-js": "^2.26.0",
     "leaflet": "^1.9.4",
     "supabase-auth-helpers-qwik": "^0.0.3"

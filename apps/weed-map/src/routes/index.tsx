@@ -3,6 +3,7 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 import leaflet from 'leaflet';
 import { Link, useNavigate } from '@builder.io/qwik-city';
 import { Button } from '@ui/button';
+import { Icon } from '@ui/icon';
 
 export default component$(() => {
   // leaflet.map('map').setView([51.505, -0.09], 13)
@@ -14,18 +15,31 @@ export default component$(() => {
     // todo consider getting hold of the element like so:
     // https://qwik.builder.io/docs/components/overview/#getting-hold-of-dom-element
     console.log('Ran on the CLIENT');
-    const map = leaflet.map('map').setView([51.505, -0.09], 13);
+    const map = leaflet.map('map').setView([50.099, 14.42], 13);
 
-    leaflet
-      .tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png')
-      .addTo(map);
+    leaflet.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}').addTo(map);
   });
 
   return (
     <>
-      <div id="map" class="h-[750px]" />
-      <Link href="/stores">Stores</Link>
-      <Link href="/strains">Strains</Link>
+      <div class="absolute inset-0 flex">
+        <div class="relative flex-1 h-full">
+          <div class="absolute bottom-2 w-full flex justify-center">
+            <Link href="/stores" style="z-index: 500">
+              <Button label="Zobrazit seznam" icon="list" variant="filled"></Button>
+            </Link>
+          </div>
+
+          <div id="map" class="w-full h-full" />
+        </div>
+
+        <div class="h-full w-[500px] hidden lg:flex p-4 flex items-center justify-center">
+          <div class="flex flex-col gap-2 items-center">
+            <Icon icon="storefront" class="text-primary-600 text-5xl"></Icon>
+            <span class="font-mono">List of stores...</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 });

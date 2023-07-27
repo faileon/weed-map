@@ -2,14 +2,17 @@ import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import { Logo } from '../logo/logo';
 import styles from './header.scss?inline';
 import { Button } from '@ui/button';
+import { Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
   useStylesScoped$(styles);
 
   return (
-    <header class="text-primary-800 bg-elevated h-14 sm:h-16 sticky top-0 drop-shadow p-2 ">
-      <div class="container mx-auto gap-4 sm:gap-8 flex items-center h-full">
-        <Logo class="text-4xl sm:text-5xl" />
+    <header class="text-primary-800 bg-elevated h-16 sticky top-0 drop-shadow p-2 flex justify-center">
+      <div class="container gap-4 sm:gap-8 flex items-center h-full">
+        <Link href="/">
+          <Logo class="text-5xl" />
+        </Link>
 
         {/* TODO: Make a input component */}
         <div class="search-box w-96">
