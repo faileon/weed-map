@@ -22,12 +22,13 @@ const mockStrain = {
   img_url: 'https://images.leafly.com/flower-images/gg-4.jpg',
   rating: {
     value: 4.6,
-    count: 5142,
-    likes: 82265,
+    ratings_count: 5142,
+    reviews_count: 1022,
+    likes_count: 82265,
   },
   created_at: '2023-07-09T12:54:01.829421+00:00',
   updated_at: '2023-07-09T12:54:01.829421+00:00',
-  genetic: 'Sativa',
+  genetic: 'Hybrid',
   purity: { min: 90, max: 100 },
   thc: { min: 20, max: 20 },
   cbd: { min: 0, max: 0 },
@@ -74,100 +75,137 @@ export default component$(() => {
   return (
     <>
       <div class="flex py-4">
-        <div class="flex flex-1 flex-col gap-2 bg-elevated rounded-md p-4 drop-shadow">
+        <div class="flex flex-col flex-1 gap-2 bg-elevated rounded-md p-4 drop-shadow">
           {/* Main row */}
           <div class="flex flex-wrap flex-1 flex-row gap-2">
             {/* Image container */}
-            <div class="flex">
-              <img class="object-cover object-center h-96 w-96 rounded-xl" src={strain.img_url} />
+            <div class="flex grow md:grow-0 ">
+              <img class="object-cover h-full w-full md:h-52 md:w-52 rounded-xl" src={strain.img_url} />
             </div>
 
             {/* KPIs container */}
-            <div class="flex flex-1 flex-col gap-2 bg-elevated rounded-md p-4  ">
-              <div class="text-2xl font-medium">{strain.name}</div>
-              <div class="flex flex-row">{'aka '.concat(strain.aliases.map((alias) => alias).join(', '))}</div>
+            <div class="flex flex-col grow p-4 text-sm gap-0 rounded-md">
+              {/* Title */}
+              <div class="text-4xl font-bold">{strain.name}</div>
+              {/* Name aliases */}
+              <div class="text-xs text-slate-500">{'aka '.concat(strain.aliases.map((alias) => alias).join(', '))}</div>
+              <div class="mb-4"></div>
 
-              <div class="flex flex-row">
-                <div>{strain.genetic}</div>
-                <div class="px-1">
-                  THC {strain.thc.min}-{strain.thc.max}%
+              <div class="flex flex-row justify-between">
+                {/* Column left */}
+                <div class="flex flex-col gap-0.5">
+                  {/* Genetic */}
+                  <div class="flex shrink gap-x-1">
+                    <div class="rounded-md px-2 py-0.5 bg-yellow-500">{strain.genetic}</div>
+                  </div>
+
+                  {/* THC, CBD levels */}
+                  <div class="flex flex-row">
+                    <div class="">THC {strain.thc.min}%</div>
+                    <span class="w-1 h-1 mx-1.5 self-center bg-primary-600 rounded-full"></span>
+                    <div class="">CBD {strain.cbd.min}%</div>
+                  </div>
+
+                  {/* Price */}
+                  <div class="flex flex-row">
+                    $$$ ({strain.price.min}-{strain.price.max} {strain.price.currency})
+                  </div>
                 </div>
-                <div class="px-1">
-                  CBD {strain.cbd.min}-{strain.cbd.max}%
+
+                {/* Column right */}
+                <div class="flex flex-col items-end gap-0.5">
+                  {/* Ratings */}
+                  <div class="flex items-center">
+                    <Icon icon="star_rate" class="text-sm text-primary-700" filled />
+                    <p class="ml-1 text-md font-bold text-center">{strain.rating.value}</p>
+                    <span class="w-1 h-1 mx-1.5 self-center bg-primary-600 rounded-full"></span>
+                    <a href="#" class="hover:text-primary-500">
+                      {strain.rating.ratings_count}x
+                    </a>
+                  </div>
+
+                  {/* Reviews */}
+                  <a href="#" class="hover:text-primary-500">
+                    reviews {strain.rating.reviews_count}
+                  </a>
+
+                  {/* Likes */}
+                  <a href="#" class="hover:text-primary-500">
+                    likes {strain.rating.likes_count}
+                  </a>
                 </div>
-              </div>
-              <div class="flex flex-row">
-                <span>
-                  Price: {strain.price.min}-{strain.price.max} {strain.price.currency}
-                </span>
               </div>
             </div>
 
             {/* Ratings container */}
-            <div class="flex flex-col p-4 min-w-[10rem]">
-              <div class="text-4xl">{strain.rating.value}</div>
-              <div>
+            {/* <div class="flex flex-col items-end grow">
+              <div class="flex text-7xl">{strain.rating.value}</div>
+              <div class="">
                 <Icon icon="star_rate_half" class="text-s"></Icon>
                 <Icon icon="star_rate" class="text-s"></Icon>
                 <Icon icon="star_rate" class="text-s"></Icon>
                 <Icon icon="star_rate" class="text-s"></Icon>
                 <Icon icon="star_rate" class="text-s"></Icon>
               </div>
-              <div>{strain.rating.count} ratings</div>
-              <div>{strain.rating.likes} likes</div>
-            </div>
+              <div>{strain.rating.ratings_count} ratings</div>
+              <div>{strain.rating.likes_count} likes</div>
+            </div> */}
           </div>
+          {/* END - Main row */}
 
           {/* Description row */}
-          <div class="p-4">{strain.description}</div>
+          <div class="p-4 text-justify">{strain.description}</div>
 
           {/* Highlights row */}
           <div class="p-4">
             <div>STRAIN HIGHLIGHTS</div>
 
-            {/* Feelings */}
-            <div class="flex flex-row gap-3">
-              <div class="flex flex-row">
-                <Icon icon="spa" class="text-base" />
-                <div>Feelings:</div>
+            <div class="text-sm">
+              {/* Feelings */}
+              <div class="flex flex-row gap-3">
+                <div class="flex flex-row">
+                  <Icon icon="spa" class="text-base" />
+                  <div>Feelings:</div>
+                </div>
+                {strain.feelings.map((feeling) => (
+                  <Link href={`/strains?feeling=${feeling.name}`} key={feeling.name} class="hover:text-primary-500">
+                    {feeling.name}
+                  </Link>
+                ))}
               </div>
-              {strain.feelings.map((feeling) => (
-                <Link href={`/strains?feeling=${feeling.name}`} class="hover:text-primary-600">
-                  {feeling.name}
-                </Link>
-              ))}
-            </div>
 
-            {/* Negatives */}
-            <div class="flex flex-row gap-3">
-              <div>Negatives:</div>
-              {strain.negatives.map((negative) => (
-                <Link href={`/strains?negative=${negative.name}`} class="hover:text-primary-600">
-                  {negative.name}
-                </Link>
-              ))}
-            </div>
+              {/* Negatives */}
+              <div class="flex flex-row flex-wrap gap-3">
+                <div>Negatives:</div>
+                {strain.negatives.map((negative) => (
+                  <Link href={`/strains?negative=${negative.name}`} key={negative.name} class="hover:text-primary-500">
+                    {negative.name}
+                  </Link>
+                ))}
+              </div>
 
-            {/* Helps */}
-            <div class="flex flex-row gap-3">
-              <div>Helps with:</div>
-              {strain.helps.map((help) => (
-                <Link href={`/strains?helps-with=${help.name}`} class="hover:text-primary-600">
-                  {help.name}
-                </Link>
-              ))}
-            </div>
+              {/* Helps */}
+              <div class="flex flex-row gap-3">
+                <div>Helps with:</div>
+                {strain.helps.map((help) => (
+                  <Link href={`/strains?helps-with=${help.name}`} key={help.name} class="hover:text-primary-500">
+                    {help.name}
+                  </Link>
+                ))}
+              </div>
 
-            {/* Flavor */}
-            <div class="flex flex-row gap-3">
-              <div>Flavor:</div>
-              {strain.flavors.map((flavor) => (
-                <Link href={`/strains?flavor=${flavor.name}`} class="hover:text-primary-600">
-                  {flavor.name}
-                </Link>
-              ))}
+              {/* Flavor */}
+              <div class="flex flex-row gap-3">
+                <div>Flavor:</div>
+                {strain.flavors.map((flavor) => (
+                  <Link href={`/strains?flavor=${flavor.name}`} key={flavor.name} class="hover:text-primary-500">
+                    {flavor.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
+          {/* END - Highlights row */}
         </div>
       </div>
     </>
