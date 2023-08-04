@@ -118,9 +118,9 @@ export default component$(() => {
                   <div class="flex items-center">
                     <Icon icon="star_rate" class="text-sm text-primary-700" filled />
                     <p class="ml-1 text-md font-bold text-center">{strain.rating.value}</p>
-                    <span class="w-1 h-1 mx-1.5 self-center bg-primary-600 rounded-full"></span>
+                    {/* <span class="w-1 h-1 mx-1.5 self-center bg-primary-600 rounded-full"></span> */}
                     <a href="#" class="hover:text-primary-500">
-                      {strain.rating.ratings_count}x
+                      &nbsp;({strain.rating.ratings_count})
                     </a>
                   </div>
 
@@ -157,51 +157,67 @@ export default component$(() => {
           <div class="p-4 text-justify">{strain.description}</div>
 
           {/* Highlights row */}
-          <div class="p-4">
-            <div>STRAIN HIGHLIGHTS</div>
-
-            <div class="text-sm">
+          <div class="flex flex-col gap-2 p-4">
+            <div class="font-bold">STRAIN HIGHLIGHTS</div>
+            <div class="flex flex-col columns-2 gap-2 text-sm">
               {/* Feelings */}
-              <div class="flex flex-row gap-3">
-                <div class="flex flex-row">
-                  <Icon icon="spa" class="text-base" />
-                  <div>Feelings:</div>
+              <div class="flex flex-col gap-2">
+                <div>Feelings</div>
+                <div class="flex flex-row gap-2 columns-3">
+                  {strain.feelings.map((feeling) => (
+                    <Link class="w-full hover:text-primary-500" href={`/strains?feelings=${feeling.name}`} key={feeling.name}>
+                      <div class="flex flex-col p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={feeling.name}>
+                        <Icon icon="spa" class="text-base" />
+                        {feeling.name}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-                {strain.feelings.map((feeling) => (
-                  <Link href={`/strains?feeling=${feeling.name}`} key={feeling.name} class="hover:text-primary-500">
-                    {feeling.name}
-                  </Link>
-                ))}
               </div>
 
               {/* Negatives */}
-              <div class="flex flex-row flex-wrap gap-3">
-                <div>Negatives:</div>
-                {strain.negatives.map((negative) => (
-                  <Link href={`/strains?negative=${negative.name}`} key={negative.name} class="hover:text-primary-500">
-                    {negative.name}
-                  </Link>
-                ))}
+              <div class="flex flex-col gap-2">
+                <div>Negatives</div>
+                <div class="flex flex-row gap-2 columns-3">
+                  {strain.negatives.map((negative) => (
+                    <Link class="w-full hover:text-primary-500" href={`/strains?negatives=${negative.name}`} key={negative.name}>
+                      <div class="flex flex-col p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200">
+                        <Icon icon="spa" class="text-base" />
+                        {negative.name}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
 
               {/* Helps */}
-              <div class="flex flex-row gap-3">
-                <div>Helps with:</div>
-                {strain.helps.map((help) => (
-                  <Link href={`/strains?helps-with=${help.name}`} key={help.name} class="hover:text-primary-500">
-                    {help.name}
-                  </Link>
-                ))}
+              <div class="flex flex-col gap-2">
+                <div>Helps with</div>
+                <div class="flex flex-row gap-2">
+                  {strain.helps.map((help) => (
+                    <Link class="w-full hover:text-primary-500" href={`/strains?helps=${help.name}`} key={help.name}>
+                      <div class="flex flex-col p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={help.name}>
+                        <Icon icon="spa" class="text-base" />
+                        {help.name}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
 
               {/* Flavor */}
-              <div class="flex flex-row gap-3">
-                <div>Flavor:</div>
-                {strain.flavors.map((flavor) => (
-                  <Link href={`/strains?flavor=${flavor.name}`} key={flavor.name} class="hover:text-primary-500">
-                    {flavor.name}
-                  </Link>
-                ))}
+              <div class="flex flex-col gap-2">
+                <div>Flavor</div>
+                <div class="flex flex-row gap-2">
+                  {strain.flavors.map((flavor) => (
+                    <Link class="w-full hover:text-primary-500" href={`/strains?flavor=${flavor.name}`} key={flavor.name}>
+                      <div class="flex flex-col p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={flavor.name}>
+                        <Icon icon="spa" class="text-base" />
+                        {flavor.name}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
