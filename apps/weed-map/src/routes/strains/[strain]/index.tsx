@@ -43,7 +43,7 @@ const mockStrain = {
     { name: 'hungry', evidence: 30 },
   ],
   negatives: [
-    { name: 'dry mouth', evidence: 30 },
+    { name: 'dry mouth xyzas asd asd asd  asd asd sa dsa d', evidence: 30 },
     { name: 'paranoid', evidence: 30 },
     { name: 'dry eyes', evidence: 30 },
   ],
@@ -59,6 +59,7 @@ const mockStrain = {
   ],
   terpene_dominant: 'caryophyllene',
   terpene_other: ['myrcene', 'limonene'],
+  likes: true,
 };
 
 export const useStrain = routeLoader$(async (req) => {
@@ -95,9 +96,9 @@ export default component$(() => {
                 {/* Column left */}
                 <div class="flex flex-col gap-0.5">
                   {/* Genetic */}
-                  <div class="flex shrink gap-x-1">
-                    <div class="rounded-md px-2 py-0.5 bg-yellow-500">{strain.genetic}</div>
-                  </div>
+                  <Link href={`/strains?genetic=${strain.genetic}`} class="flex shrink gap-x-1">
+                    <div class="rounded-md px-2 py-0.5 bg-yellow-500 hover:bg-yellow-400">{strain.genetic}</div>
+                  </Link>
 
                   {/* THC, CBD levels */}
                   <div class="flex flex-row">
@@ -115,24 +116,27 @@ export default component$(() => {
                 {/* Column right */}
                 <div class="flex flex-col items-end gap-0.5">
                   {/* Ratings */}
-                  <div class="flex items-center">
+                  <Link href="#" class="hover:text-primary-500 flex items-center gap-1">
                     <Icon icon="star_rate" class="text-sm text-primary-700" filled />
-                    <p class="ml-1 text-md font-bold text-center">{strain.rating.value}</p>
+                    <div class="text-md font-bold text-center">{strain.rating.value}</div>
                     {/* <span class="w-1 h-1 mx-1.5 self-center bg-primary-600 rounded-full"></span> */}
-                    <a href="#" class="hover:text-primary-500">
-                      &nbsp;({strain.rating.ratings_count})
-                    </a>
-                  </div>
+                    <div>({strain.rating.ratings_count})</div>
+                  </Link>
 
                   {/* Reviews */}
-                  <a href="#" class="hover:text-primary-500">
+                  {/* <Link href="#" class="hover:text-primary-500">
                     reviews {strain.rating.reviews_count}
-                  </a>
+                  </Link> */}
 
                   {/* Likes */}
-                  <a href="#" class="hover:text-primary-500">
-                    likes {strain.rating.likes_count}
-                  </a>
+                  <div class="flex flex-row items-center gap-1">
+                    <Link href="#">
+                      <Icon icon="favorite" class="text-sm text-primary-700 hover:text-primary-500" filled />
+                    </Link>
+                    <Link href="#" class="hover:text-primary-500">
+                      ({strain.rating.likes_count})
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -159,16 +163,17 @@ export default component$(() => {
           {/* Highlights row */}
           <div class="flex flex-col gap-2 p-4">
             <div class="font-bold">STRAIN HIGHLIGHTS</div>
-            <div class="flex flex-col columns-2 gap-2 text-sm">
+            {/* TODO: items should go in one column first, then other column */}
+            <div class="grid grid-cols-1 md:grid-cols-2 md:grid-flow-row gap-x-8 gap-y-2 text-sm">
               {/* Feelings */}
-              <div class="flex flex-col gap-2">
+              <div class="flex flex-col gap-2 grow">
                 <div>Feelings</div>
-                <div class="flex flex-row gap-2 columns-3">
+                <div class="grid grid-cols-3 gap-2 items-stretch grow">
                   {strain.feelings.map((feeling) => (
-                    <Link class="w-full hover:text-primary-500" href={`/strains?feelings=${feeling.name}`} key={feeling.name}>
-                      <div class="flex flex-col p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={feeling.name}>
-                        <Icon icon="spa" class="text-base" />
-                        {feeling.name}
+                    <Link class="hover:text-primary-500" href={`/strains?feelings=${feeling.name}`} key={feeling.name}>
+                      <div class="flex flex-col w-full p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={feeling.name}>
+                        <Icon icon="spa" class="text-4xl text-primary-600" />
+                        <div>{feeling.name}</div>
                       </div>
                     </Link>
                   ))}
@@ -178,12 +183,12 @@ export default component$(() => {
               {/* Negatives */}
               <div class="flex flex-col gap-2">
                 <div>Negatives</div>
-                <div class="flex flex-row gap-2 columns-3">
+                <div class="grid grid-cols-3 gap-2 items-stretch">
                   {strain.negatives.map((negative) => (
-                    <Link class="w-full hover:text-primary-500" href={`/strains?negatives=${negative.name}`} key={negative.name}>
-                      <div class="flex flex-col p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200">
-                        <Icon icon="spa" class="text-base" />
-                        {negative.name}
+                    <Link class="flex hover:text-primary-500" href={`/strains?negatives=${negative.name}`} key={negative.name}>
+                      <div class="flex flex-col w-full p-2 rounded-md bg-primary-100 text-center hover:bg-primary-200">
+                        <Icon icon="spa" class="text-4xl text-primary-600" />
+                        <div>{negative.name}</div>
                       </div>
                     </Link>
                   ))}
@@ -193,12 +198,12 @@ export default component$(() => {
               {/* Helps */}
               <div class="flex flex-col gap-2">
                 <div>Helps with</div>
-                <div class="flex flex-row gap-2">
+                <div class="grid grid-cols-3 gap-2 items-stretch">
                   {strain.helps.map((help) => (
                     <Link class="w-full hover:text-primary-500" href={`/strains?helps=${help.name}`} key={help.name}>
-                      <div class="flex flex-col p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={help.name}>
-                        <Icon icon="spa" class="text-base" />
-                        {help.name}
+                      <div class="flex flex-col w-full p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={help.name}>
+                        <Icon icon="spa" class="text-4xl text-primary-600" />
+                        <div>{help.name}</div>
                       </div>
                     </Link>
                   ))}
@@ -208,12 +213,12 @@ export default component$(() => {
               {/* Flavor */}
               <div class="flex flex-col gap-2">
                 <div>Flavor</div>
-                <div class="flex flex-row gap-2">
+                <div class="grid grid-cols-3 gap-2 items-stretch">
                   {strain.flavors.map((flavor) => (
                     <Link class="w-full hover:text-primary-500" href={`/strains?flavor=${flavor.name}`} key={flavor.name}>
-                      <div class="flex flex-col p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={flavor.name}>
-                        <Icon icon="spa" class="text-base" />
-                        {flavor.name}
+                      <div class="flex flex-col w-full p-2 rounded-md bg-primary-100 items-center hover:bg-primary-200" key={flavor.name}>
+                        <Icon icon="spa" class="text-4xl text-primary-600" />
+                        <div>{flavor.name}</div>
                       </div>
                     </Link>
                   ))}
