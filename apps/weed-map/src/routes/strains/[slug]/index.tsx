@@ -63,9 +63,9 @@ const mockStrain = {
 };
 
 export const useStrain = routeLoader$(async (req) => {
-  const { strain } = req.params;
+  const { slug } = req.params;
   const client = getSupabaseClient(req);
-  const { data } = await client.from('strains').select('*').eq('slug', strain).single();
+  const { data } = await client.from('strains').select('*').eq('slug', slug).single();
   return data;
 });
 
