@@ -2,7 +2,6 @@ import { component$, useStore, useStyles$, useStylesScoped$ } from '@builder.io/
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { Link, routeLoader$ } from '@builder.io/qwik-city';
 import { getSupabaseClient } from '@api/client';
-import StrainStyles from './strain.css?inline';
 import { Icon } from '@ui/icon';
 
 export const head: DocumentHead = {
@@ -71,7 +70,6 @@ export const useStrain = routeLoader$(async (req) => {
 
 export default component$(() => {
   const strain = useStore({ ...mockStrain });
-  useStylesScoped$(StrainStyles);
 
   return (
     <>
